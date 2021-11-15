@@ -1,0 +1,17 @@
+﻿  Origem.c
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(172,17): warning C4473: 'scanf_s' : não há argumentos suficientes transmitidos para a cadeia de caracteres de formato
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(172,17): message : espaços reservados e seus parâmetros esperam 2 argumentos variadic, mas 1 foram fornecidos
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(172,17): message : o argumento variadic 2 ausente é requerido pela cadeia de formato '%c'
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(172,17): message : esse argumento é usado como um tamanho do buffer
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(173,24): warning C4013: 'toupper' indefinido; assumindo extern retornando int
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(252,66): warning C4047: 'função': 'int' difere em níveis de indireção de 'void *'
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(252,62): warning C4024: 'criarNoArvore': tipos diferentes para parâmetro formal e real 2
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(292,43): warning C4018: '<': incompatibilidade de signed/unsigned
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(400,60): warning C4047: 'função': 'int' difere em níveis de indireção de 'void *'
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(400,56): warning C4024: 'criarNoArvore': tipos diferentes para parâmetro formal e real 1
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(400,66): warning C4047: 'função': 'int' difere em níveis de indireção de 'void *'
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(400,62): warning C4024: 'criarNoArvore': tipos diferentes para parâmetro formal e real 2
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(215,1): warning C4047: 'inicializando': 'unsigned char' difere em níveis de indireção de 'void *'
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(270,1): warning C4047: 'inicializando': 'unsigned char' difere em níveis de indireção de 'void *'
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Teste\Origem.c(372,1): warning C4047: 'inicializando': 'unsigned int' difere em níveis de indireção de 'void *'
+  Teste.vcxproj -> C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\teste_huffman\Teste\Debug\Teste.exe

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>MiTab+</title>
+</head>
+
+<body>
+    
+    <div class="main">
+
+        <div class="clock card">
+            <span id="MyClockDisplay">00:00</span>
+        </div>
+        <div class="card menu"></div>
+
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <ol class="carousel-indicators">
+                <i class="fas fa-music" data-target="#carouselExampleIndicators" data-slide-to="0"></i>
+                <i data-target="#carouselExampleIndicators" data-slide-to="1" class="fas fa-home" class="active"></i>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item ">
+                    <div class="card musica-container">
+                        <div id="player-container">
+                            <div id="player"></div>
+                        </div>
+                        <div id="nome-musica">
+                            <span id="text-nome-musica">Música</span>
+                        </div>
+                        <div class="n_p_video_progressbar">
+                            <div id="progressBar">
+                                <div></div>
+                            </div>
+                        </div>
+                        <div id="player-controls">
+                            <button><i id="btn-aleatorio" class="fas fa-random"></i></button>
+                            <button><i id="btn-anterior" class="fas fa-backward"></i></button>
+                            <button><i id="btn-play" class="fas fa-play"></i></button>
+                            <button><i id="btn-proximo" class="fas fa-forward"></i></button>
+                            <button><i id="btn-repetir" class="fas fa-redo"></i></button>
+                        </div>
+                    </div>
+                    <div class="card playlist-query">
+                        <div class="playlist-cabeçalho">
+                            <img src="" alt="">
+                            <h1>nome-musica</h1>
+                        </div>
+                        <li class="playlist-music">I love You</li>
+                        <li class="playlist-music">I love You</li>
+                        <li class="playlist-music">I love You</li>
+                    </div>
+                    <div class="card playlists-container">
+                        <div class="card-playlist">
+                            <button style="padding: 0%;">
+                                <img class="img-playlist"
+                                    src="https://kstationtv.com/wp-content/uploads/2020/05/Treasure-Yoshi-2.jpe" alt="">
+                                <div class="title-playlist-container">
+                                    <span class="title-playlist">I love you Tresure</span>
+                                    <span id="srcPlaylist" visible="false">OLAK5uy_k1kEJCk_CbtFpLGyIptQnnozpsTMyhiTA</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="carousel-item active">
+                    <div id="todolist" class="card">
+                        <div id="myDIV" class="header">
+                            <h2 style="margin:5px">My To Do List</h2>
+                            <input type="text" id="myInput" placeholder="Title...">
+                            <span onclick="newElement()" class="addBtn">Add</span>
+                        </div>
+
+                        <ul id="myUL">
+                            <li class="todo-li">Hit the gym</li>
+                            <li class="checked todo-li">Pay bills</li>
+                            <li class="todo-li">Meet George</li>
+                            <li class="todo-li">Buy eggs</li>
+                            <li class="todo-li">Read a book</li>
+                            <li class="todo-li">Organize office</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">Alarmes</div>
+
+                    <div class="card">Pomodoro</div>
+                    
+                    <div class="card"></div>
+                </div>
+                <div class="carousel-item">
+                    <div id="videoPlaylist"></div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span style="opacity: 0;" class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span style="opacity: 0;" class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="card footer">
+
+        </div>
+    </div>
+    <script>
+        //  TO DO LIST <------------------------------------------------------
+        var myNodelist = document.getElementsByClassName("todo-li");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            myNodelist[i].appendChild(span);
+        }
+
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function (ev) {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');
+            }
+        }, false);
+
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("myInput").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+            if (inputValue === '') {
+                alert("You must write something!");
+            } else {
+                document.getElementById("myUL").appendChild(li);
+            }
+            document.getElementById("myInput").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+        }
+
+    </script>
+    <script src="https://kit.fontawesome.com/8468fdb026.js" crossorigin="anonymous"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="javascript.js"></script>
+</body>
+
+</html>

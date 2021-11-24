@@ -6,16 +6,20 @@
 #include <limits.h>
 #include <inttypes.h>
 #include <string.h>
+#include <iostream>
+#include "ListaLigada.h"
+#include "NodoDeListaLigada.h"
+#include "NoArvore.h"
 
 //Função utilizada nos testes para printar os bits de cada byte
 void printBits(char num)
 {
     for (int i = 7; 0 <= i; i--) {
-        printf("%c", (num & (1 << i)) ? '1' : '0');
+        std::cout << (num & (1 << i)) ? '1' : '0';
     }
-    printf("\n");
+    std::cout << "\n";
 }
-
+/*
 typedef struct NoArvore
 {
     int byte;
@@ -141,7 +145,7 @@ struct NodoDeListaLigada* Remova(struct NodoDeListaLigada* NodoRemover, struct N
         return Inicio;
     }
 
-}
+}*/
 
 int main()
 {
@@ -155,46 +159,38 @@ int main()
     FILE* arqCompactar = NULL;
     FILE* arqDescompactar = NULL;
 
-    printf("-----------------------------------------------------\n"); fflush(stdout);
-    printf("Giovana Mendonça Zambanini                      20728\n"); fflush(stdout);
-    printf("Isabela Clementino Ponciano Ferreira            20138\n"); fflush(stdout);
-    printf("Milena Furuta Shishito                          20148\n"); fflush(stdout);
-    printf("Pedro Henrique Perez Dias                       20152\n"); fflush(stdout);
-    printf("-----------------------------------------------------\n"); fflush(stdout);
-    printf("Bem-vindo(a)!"); fflush(stdout);
+    std::cout << "-----------------------------------------------------\n"
+        << "Giovana Mendonça Zambanini                      20728\n"
+        << "Isabela Clementino Ponciano Ferreira            20138\n"
+        << "Milena Furuta Shishito                          20148\n"
+        << "Pedro Henrique Perez Dias                       20152\n"
+        << "-----------------------------------------------------\n"
+        << "Bem-vindo(a)!";
     while (opcao != 'F' && opcao != 'f')
     {
-        printf("\n\nSelecione a tarefa que deseja realizar:\n"); fflush(stdout);
-        printf("[C] Compactar\n"); fflush(stdout);
-        printf("[D] Descompactar\n"); fflush(stdout);
-        printf("[F] Fim\n"); fflush(stdout);
-        printf("Digite aqui sua resposta: "); fflush(stdout);
-        scanf_s(" %c", &opcao); fflush(stdin);
+        std::cout << "\n\nSelecione a tarefa que deseja realizar:\n"
+            << "[C] Compactar\n"
+            << "[D] Descompactar\n"
+            << "[F] Fim\n"
+            << "Digite aqui sua resposta: ";
+        std::cin >> &opcao;
         opcao = toupper(opcao);
         
-        switch (opcao)
-        {
-        case 'C':
-            printf("\n            C O M P A C T A R \n\n");
-            fflush(stdout);
-            printf("Digite aqui o nome do arquivo a ser compactado (Ex: arq.txt): \n");
-            fflush(stdout);
-            scanf_s("%30s", nomeArq, sizeof(nomeArq)); // pega o nome do arquivo
-            fflush(stdin);
-            //printf("%s\n", nomeArq);
-            //fflush(stdout);   
+        //switch (opcao)
+        //{
+        //case 'C':
+            std::cout << "\n            C O M P A C T A R \n\n"
+                << "Digite aqui o nome do arquivo a ser compactado (Ex: arq.txt): \n";
+            std::cin >> nomeArq; // pega o nome do arquivo
+            
             fopen_s(&arqLer, nomeArq, "rb"); // Ler arquivo selecionado
-
             //Adiciona _.huff ao nome do arquivo, para indica q é um arquivo compactado 
             strcat_s(nomeArq, (strlen(nomeArq) + sizeof("._huff")), "_.huff\0");
-            //printf("%s", nomeArq);
-            //fflush(stdout);
 
             fopen_s(&arqCompactar, nomeArq, "wb"); //Criar arquivo para compactar
             if (arqLer == NULL) // Se não conseguiu achar o arquivo para leitura
             {
-                printf("[ERROR] Problemas em ENCONTRAR o arquivo selecionado\n\n");
-                fflush(stdout);
+                std::cout << "[ERROR] Problemas em ENCONTRAR o arquivo selecionado\n\n";
                 break;
             }
 
@@ -210,21 +206,15 @@ int main()
             unsigned int tbFreq[256]; // tabela de frequencia de bytes.
             for (int pos = 0; pos <= 255; pos++) { tbFreq[pos] = 0; } // zera as posições da tabela de freq
 
-            //printf("\n--tabela de frequencia--\n\n");
-            //fflush(stdout);
             unsigned char c = NULL;
             while (fread(&c, sizeof(unsigned char), 1, arqLer)) // lê char por char do arquivo
             {
                 tbFreq[c]++;
-                //printf("Byte: %d  \tFrequencia: %d\n", c, tbFreq[c]);
-                //fflush(stdout);
             }
 
             //Criacao da Fila de prioridades
-            struct ListaLigada* lista = (struct ListaLigada*)malloc(sizeof(struct ListaLigada));
-            lista->primeiro = NULL;
-            lista->ultimo = NULL;
-
+            ListaLigada lista; 
+                
             for (int i = 0; i < 256; i++) {
 
                 ///printa a tabela de frequencia no novo arq
@@ -232,50 +222,49 @@ int main()
                 fwrite(&tbFreq[i], sizeof(unsigned int), 1, arqCompactar);
 
                 if (tbFreq[i] != 0) { // insere os bytes com freq > 0 na lista de prioridade
-                    Insira(criarNoDeListaLigada(criarNoArvore(i, tbFreq[i], NULL, NULL)), lista->primeiro, lista);
+                    NoArvore noArvore = NoArvore(i, tbFreq[i], NULL, NULL);
+                    NodoDeListaLigada noLista = NodoDeListaLigada(&noArvore, NULL);
+                    lista.Insira(&noLista, lista.getPrimeiro());
                 }
             }
 
-            //Print da lista ligada
-            //printf("\n--lista ordenada--\n\n");
-            fflush(stdout);
-            struct NodoDeListaLigada* no = lista->primeiro;
-            while (no != NULL) {
-                //printf("%d :\t%d\n", no->info->byte, no->info->freq);
-                fflush(stdout);
+            NodoDeListaLigada no; 
+            /*while (no != NULL) { //contrutor de copia?
                 no = no->prox;
-            }
+            }*/
 
             //Construcao da arvore a partir da fila de prioridades
-            while (lista->primeiro->prox != NULL) // enquanto tiver dois ou mais nodos
+            while (lista.getPrimeiro()->getProx() != NULL) // enquanto tiver dois ou mais nodos
             {
-                no = criarNoDeListaLigada(criarNoArvore(257, NULL, NULL, NULL));
+                NoArvore noArvore = NoArvore(257, NULL, NULL, NULL);
+                no = NodoDeListaLigada(&noArvore, NULL);
 
-                no->info->Esq = lista->primeiro->info; // esquerda
-                Remova(lista->primeiro, lista->primeiro, lista);
+                no.getInfo()->setEsq(lista.getPrimeiro()->getInfo()); // esquerda
+                lista.Remova(lista.getPrimeiro(), lista.getPrimeiro());
 
-                no->info->Dir = lista->primeiro->info; // direita
-                Remova(lista->primeiro, lista->primeiro, lista);
-
-                no->info->freq = no->info->Esq->freq + no->info->Dir->freq;
-                Insira(no, lista->primeiro, lista);  // frequencia
+                no.getInfo()->setDir(lista.getPrimeiro()->getInfo()); // direita
+                lista.Remova(lista.getPrimeiro(), lista.getPrimeiro()); //VERIFICAR O REMOVA
+               
+                no.getInfo()->setFreq(no.getInfo()->getEsq()->getFreq() + no.getInfo()->getDir()->getFreq());
+                lista.Insira(&no, lista.getPrimeiro());  // frequencia
             }
+            
 
             // tirando a árvore da lista
-            struct NoArvore* raiz = criarNoArvore(no->info->byte, no->info->freq, no->info->Esq, no->info->Dir);
-            Remova(lista->primeiro, lista->primeiro, lista);
-
+            NoArvore raiz = NoArvore(no.getInfo()->getByte(), no.getInfo()->getFreq(), no.getInfo()->getEsq(), no.getInfo()->getDir());
+            lista.Remova(lista.getPrimeiro(), lista.getPrimeiro());
+            
             // compactando a o arquivo...
             fseek(arqLer, 0, SEEK_SET);     // volta no começo do arq de leitura
             unsigned char aux = NULL;
-            int tamanhoArvore = Altura(raiz);
+            int tamanhoArvore = raiz.Altura(&raiz);
             int tamanhoCodigo = (tamanhoArvore * sizeof(char)) + 1;
             char* codigoHuffman = (char*)malloc(tamanhoCodigo); //Criado a partir do tamanho da árvore, para não ocupar memória desnecessária
 
-            printf("\n--compactando bytes--\n\n");
-            fflush(stdout);
-            printf("%d -- ALTURA, %d -- TAMANHO CHAR, %d -- TAMANHO CODIGO\n", tamanhoArvore, sizeof(char), sizeof(codigoHuffman));
-            fflush(stdout);
+            std::cout << "\nstd::cout <<  bytes--\n\n"
+                << tamanhoArvore << " -- ALTURA, " 
+                << sizeof(char) << " -- TAMANHO CHAR, " 
+                << sizeof(codigoHuffman) << " -- TAMANHO CODIGO\n";
             int tamanhoByte = 0;
             unsigned char auxiliar = 0;
 
@@ -285,9 +274,8 @@ int main()
                 strcpy_s(codigoHuffman, sizeof(codigoHuffman), "");
                 int posCaminho = 0;
                 if (tbFreq[aux] != 0) {
-                    percorrerArvore(raiz, aux, codigoHuffman, posCaminho); // guarda o caminho da raiz até a folha no codigoHuffman
+                    raiz.percorrerArvore(&raiz, aux, codigoHuffman, posCaminho); // guarda o caminho da raiz até a folha no codigoHuffman
 
-                    //printf("%s -- CODIGO\n", codigoHuffman)    
                     //alteracao
                     for (int pos = 0; pos < strlen(codigoHuffman); pos++) // percorre o codigoHuffman
                     {
@@ -296,61 +284,49 @@ int main()
                             // auxiliar = 00000000
                             // 1        = 00000001   
                             auxiliar = auxiliar | (1 << (7 - (tamanhoByte % 8))); // move o 1 para a posição no codigoHuffman
-                            //printf("AUXILIAR ATUALIZADO");
-                            //printBits(auxiliar);
                         }
                         tamanhoByte++;
                         if (tamanhoByte % 8 == 0) // formou um byte!!!!
                         {
-                            //printf("\nFORMOU UM BYTE: %d ---- ", auxiliar);
-                            //printBits(auxiliar);
                             fwrite(&auxiliar, sizeof(unsigned char), 1, arqCompactar);
                             auxiliar = 0;
                         }
                     }
-                    //printf("Byte: %d\tCodigo: %s\tLenght: %d\n", aux, codigoHuffman, strlen(codigoHuffman));
-                    //fflush(stdout);
                 }
             }
             printBits(auxiliar);
-            printf("---- numero com desprezados");
+            std::cout << "---- numero com desprezados";
             qtdBitsDesprez = tamanhoByte % 8;
             fwrite(&auxiliar, 1, 1, arqCompactar); // ESCREVE O ULTIMO 
             fseek(arqCompactar, 0, SEEK_SET);      // volta pro começo do arquivo
             fwrite(&qtdBitsDesprez, sizeof(unsigned char), 1, arqCompactar); // reescreve o qtdBitsDesprez
 
-            printf("\n. . .SUCESSO!!!\n");
-            fflush(stdout);
-            free(lista);
+            std::cout << "\n. . .SUCESSO!!!\n";
+            free(&lista);
             free(codigoHuffman);
             fclose(arqCompactar);
             fclose(arqLer);
             break;
-
+            /*
         case 'D':
-            printf("\n            D E S C O M P A C T A R \n\n");
-            fflush(stdout);
-
-            printf("Digite aqui o nome do arquivo a ser descompactado (Ex: arq.txt.huff): \n");
-            fflush(stdout);
-            scanf_s("%55s", nomeArqCompac, sizeof(nomeArqCompac));
+            std::cout << "\n            D E S C O M P A C T A R \n\n";
+            
+            
+            std::cout << "Digite aqui o nome do arquivo a ser descompactado (Ex: arq.txt.huff): \n";
+            std::cin >> nomeArqCompac;
             char* nomeArqDescompac;
             fopen_s(&arqCompactar, nomeArqCompac, "rb");
-            printf("%s", nomeArqCompac);
-            fflush(stdout);
+            std::cout << nomeArqCompac;
 
             //Remove o _.huff 
             char* next_token1 = NULL;
             nomeArqDescompac = strtok_s(nomeArqCompac, "_", &next_token1);
 
-            //printf("%s", nomeArqDescompac);
-            //fflush(stdout);
 
             fopen_s(&arqDescompactar, nomeArqDescompac, "wb");
             if (arqCompactar == NULL) // Se arquivo a ser descompactado não existir
             {
-                printf("[ERROR] Problemas em ENCONTRAR o arquivo selecionado\n\n");
-                fflush(stdout);
+                std::cout << "[ERROR] Problemas em ENCONTRAR o arquivo selecionado\n\n";
                 return;
             }
 
@@ -367,8 +343,6 @@ int main()
             unsigned char desprezado;
             fread(&desprezado, sizeof(unsigned char), 1, arqCompactar);
 
-            //printf("\n--tabela de frequencia--\n\n");
-            //fflush(stdout);
             unsigned int ch = NULL;
             unsigned int f = 0;
             for (int i = 0; i < 256; i++) // cria a tabela freq 
@@ -377,20 +351,12 @@ int main()
                 fread(&f, sizeof(unsigned int), 1, arqCompactar); //freq
                 if (f != 0) { // os bytes q tem freq > 0 são inseridos na arvore
                     Insira(criarNoDeListaLigada(criarNoArvore(ch, f, NULL, NULL)), lis->primeiro, lis);
-                    /*printf("Byte: %d", ch);
-                    fflush(stdout);
-                    printf("\tFrequencia: %d\n", f);
-                    fflush(stdout);*/
                 }
             }
 
             //Print da lista ligada
-            //printf("\n--lista ordenada--\n\n");
-            //fflush(stdout);
             struct NodoDeListaLigada* n = lis->primeiro;
             //while (n != NULL) {
-               // printf("%d :\t%d\n", n->info->byte, n->info->freq);
-               // fflush(stdout);
                // n = n->prox;
             //}
 
@@ -420,7 +386,6 @@ int main()
             while (fread(&bit, sizeof(unsigned char), 1, arqCompactar) && posAtual < (sizeArq - 1))
             {
                 //printBits(bit);
-                //printf("\n");
                 //posContraria = 0;
                 for (int pos = 7, posContraria = 0; pos >= 0; pos--, posContraria++)
                 {
@@ -435,8 +400,6 @@ int main()
                         r = r->Dir;
 
                     if (r->Esq == NULL && r->Dir == NULL) {
-                        //printf("%c", r->byte);
-                        //fflush(stdout);
                         fwrite(&r->byte, sizeof(unsigned char), 1, arqDescompactar); //achou folha
                         r = lis->primeiro->info;
                     }
@@ -465,22 +428,19 @@ int main()
                 }
             }
 
-            printf("\n. . .SUCESSO!!!\n");
-            fflush(stdout);
+            std::cout << "\n. . .SUCESSO!!!\n";
             free(lis);
             fclose(arqDescompactar);
             fclose(arqCompactar);
+            
             break;
-
         case 'F':
-            printf("\n. . .Obrigado por utilizar esse programa!!!\n");
-            fflush(stdout);
-            break;
-        default:
-            break;
-        }
+            std::cout << "\n. . .Obrigado por utilizar esse programa!!!\n";
+            break;*/
+        //default:
+        //    break;
+        //}
     }
-
 
     return 0;
 }

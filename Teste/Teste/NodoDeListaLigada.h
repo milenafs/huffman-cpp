@@ -1,15 +1,19 @@
-#ifndef NodoDeLista
-#define NodoDeLista
-class NodoDeLista
+#ifndef NODODELISTALIGADA
+#define NODODELISTALIGADA
+#include "NoArvore.h"
+
+class NodoDeListaLigada
 {
-	private:
-		static int Numerador; 
-		static unsigned int Denominador; 
-	public:
-		static void  AssumaValor(int, unsigned int); 
-		static char* NaFormaDeString(); 
-		static void  SomeSeCom(int); 
-		static void  SubtraiaDeSi(int);
+private:
+
+	NodoDeListaLigada* prox;
+	NoArvore* info; // ponteiro de nodo de arvore
+public:	
+	 NodoDeListaLigada(NoArvore* noArvore, NodoDeListaLigada* prox);
+	 NodoDeListaLigada();
+	 NodoDeListaLigada* getProx();
+	 NoArvore* getInfo();
+	 void setProx(NodoDeListaLigada* prox);
+	 void setInfo(NoArvore* info);
 };
 #endif
-

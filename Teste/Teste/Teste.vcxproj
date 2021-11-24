@@ -139,7 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Origem.c" />
+    <ClCompile Include="ListaLigada.cpp" />
+    <ClCompile Include="NoArvore.cpp" />
+    <ClCompile Include="NodoDeListaLigada.cpp" />
+    <ClCompile Include="Origem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ListaLigada.h" />
+    <ClInclude Include="NoArvore.h" />
+    <ClInclude Include="NodoDeListaLigada.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

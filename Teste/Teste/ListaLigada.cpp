@@ -44,12 +44,14 @@ NodoDeListaLigada* ListaLigada::Remova(NodoDeListaLigada* NodoRemover, NodoDeLis
     if (Inicio == NULL)
         return Inicio;
 
-    else if (NodoRemover->getInfo()->getFreq() == Inicio->getInfo()->getByte())
+    else if (NodoRemover->getInfo()->getFreq() == Inicio->getInfo()->getFreq())
     {
-        NodoDeListaLigada* Removido = Inicio;
+        NodoDeListaLigada* Removido = new NodoDeListaLigada;
+        *Removido = *Inicio;
         Inicio = Inicio-> getProx();
         this->primeiro = Inicio;
-        free(Removido);  //Libera a posição de Removido da memória
+        delete Removido;  //Libera a posição de Removido da memória
+        
         return Inicio;
     }
     else

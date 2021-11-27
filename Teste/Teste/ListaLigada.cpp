@@ -9,12 +9,9 @@ ListaLigada::ListaLigada(NodoDeListaLigada* inicio, NodoDeListaLigada* fim)
     this->ultimo   = fim; 
 }
 
-ListaLigada::ListaLigada()
-{
-}
-/*
-Caso der erro, voltar a lista como parametro
-*/
+ListaLigada::ListaLigada(){} // construtor padrao
+
+/*Caso der erro, voltar a lista como parametro*/
 NodoDeListaLigada* ListaLigada::Insira(NodoDeListaLigada* NodoLista, NodoDeListaLigada* Inicio)
 {
     if (Inicio == NULL) // insere No início
@@ -80,9 +77,3 @@ void ListaLigada::setUltimo(NodoDeListaLigada* ultimo)
 {
     this->ultimo = ultimo;
 }
-
-/*
-Fazer operators
-Construtor de copia
-Destrutor
-*/

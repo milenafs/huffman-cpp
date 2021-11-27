@@ -9,9 +9,7 @@ NodoDeListaLigada::NodoDeListaLigada(NoArvore* no, NodoDeListaLigada* prox)
     this->prox = prox;
 }
 
-NodoDeListaLigada::NodoDeListaLigada()
-{
-}
+NodoDeListaLigada::NodoDeListaLigada(){}// construtor padrao
 	
 NodoDeListaLigada* NodoDeListaLigada::getProx() {return this->prox;}
 
@@ -27,8 +25,3 @@ void NodoDeListaLigada::setInfo(NoArvore* info)
     this->info = info;
 }
 
-/*
-Fazer operators
-Construtor de copia
-Destrutor
-*/

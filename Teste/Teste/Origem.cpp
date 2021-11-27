@@ -19,133 +19,7 @@ void printBits(char num)
     }
     std::cout << "\n";
 }
-/*
-typedef struct NoArvore
-{
-    int byte;
-    int freq;
-    struct NoArvore* Esq;
-    struct NoArvore* Dir;
-} NoArvore;
 
-NoArvore* criarNoArvore(int byte, int freq, struct NoArvore* Esq, struct NoArvore* Dir)
-{
-    struct NoArvore* no = (struct NoArvore*)malloc(sizeof(struct NoArvore));
-    no->byte = byte;
-    no->freq = freq;
-    no->Esq = Esq;
-    no->Dir = Dir;
-    return no;
-}
-
-// percorrer árvore para fazer o código de cada byte
-int percorrerArvore(struct NoArvore* raiz, int byteProc, char* caminho, int posCaminho)
-{
-    if (raiz->byte == byteProc)  // chegou na folha
-    {
-        caminho[posCaminho] = '\0';  // termina o vetor caminho
-        return 1; // achou
-    }
-    else
-    {
-        int encontrado = 0; // não achou
-
-
-        if (raiz->Esq != NULL) // se tiver filho esquerdo
-        {
-            caminho[posCaminho] = '0';
-            encontrado = percorrerArvore(raiz->Esq, byteProc, caminho, posCaminho + 1); // recursão com o filho nodo esquerdo
-        }
-
-        if (encontrado != 1 && raiz->Dir != NULL) // se tiver direita e n tiver encontrado na esquerda
-        {
-            caminho[posCaminho] = '1';
-            encontrado = percorrerArvore(raiz->Dir, byteProc, caminho, posCaminho + 1); // se tive
-        }
-        if (encontrado != 1) // se for uma folha mas n for a folha procurada
-        {
-            caminho[posCaminho] = '\0'; // finaliza
-        }
-        return encontrado;
-    }
-}
-
-const int Altura(NoArvore* noAtual)
-{
-    int alturaEsquerda,
-        alturaDireita;
-    if (noAtual == NULL)
-        return 0;
-    alturaEsquerda = Altura(noAtual->Esq);  //Recursão para contar o lado esquerdo desse nó
-    alturaDireita = Altura(noAtual->Dir);   //Recursão para contar o lado direito desse nó
-    if (alturaEsquerda >= alturaDireita)
-        return 1 + alturaEsquerda;          //Se a árvore for 'desbalanceada', retorna o maior valor (vale pra essa linha e pra debaixo)
-    return 1 + alturaDireita;
-}
-
-//Structs Lista e No da Lista
-typedef struct NodoDeListaLigada {
-    NoArvore* info; // ponteiro de nodo de arvore
-    struct NodoDeListaLigada* prox;
-}  NodoDeListaLigada;
-
-struct NodoDeListaLigada* criarNoDeListaLigada(struct NoArvore* noArvore) {
-    struct NodoDeListaLigada* noLista = (struct NodoDeListaLigada*)malloc(sizeof(struct NodoDeListaLigada));
-    noLista->info = noArvore;
-    noLista->prox = NULL;
-    return noLista;
-}
-
-typedef struct ListaLigada {
-    NodoDeListaLigada* primeiro, * ultimo;
-} ListaLigada;
-
-
-struct NodoDeListaLigada* Insira(struct NodoDeListaLigada* NodoLista, struct NodoDeListaLigada* Inicio, struct ListaLigada* Lista)
-{
-    if (Inicio == NULL) // insere No início
-    {
-        Inicio = NodoLista;
-        Lista->primeiro = Inicio;
-        return Inicio;
-    }
-    else if (NodoLista->info->freq < Inicio->info->freq) // se a frequência do NodoLista for menor que a do Inicio
-    {
-        struct NodoDeListaLigada* Novo = (struct NodoDeListaLigada*)malloc(sizeof(struct NodoDeListaLigada));
-        Novo = NodoLista;       //Armazena o NodoLista na posição criada acima
-        Novo->prox = Inicio;    //Transforma o Inicio no nó seguinte ao criado acima
-        Lista->primeiro = Novo;
-        return Novo;
-    }
-    else
-    {
-        Inicio->prox = Insira(NodoLista, Inicio->prox, Lista);
-        Lista->primeiro = Inicio;
-        return Inicio;
-    }
-}
-
-struct NodoDeListaLigada* Remova(struct NodoDeListaLigada* NodoRemover, struct NodoDeListaLigada* Inicio, struct ListaLigada* Lista)
-{
-        if (Inicio == NULL)
-            return Inicio;
-
-        else if (NodoRemover->info->byte == Inicio->info->byte)
-        {
-            struct NodoDeListaLigada* Removido = Inicio;
-            Inicio = Inicio->prox;
-            Lista->primeiro = Inicio;
-            free(Removido);  //Libera a posição de Removido da memória
-            return Inicio;
-    }
-    else
-    {
-        Inicio->prox = Remova(NodoRemover, Inicio->prox, Lista);  //Usando recursão, atualiza o valor de ínicio para uma nova comparação
-        Lista->primeiro = Inicio;  //Transforma o Inicio no primeiro da Lista
-        return Inicio;
-    }
-
-}*/
 
 int main()
 {
@@ -159,6 +33,8 @@ int main()
     FILE* arqCompactar = NULL;
     FILE* arqDescompactar = NULL;
 
+
+    //visual studio recomenda uso std, meio q força, pois dá preferencia std, senão dá erro!!
     std::cout << "-----------------------------------------------------\n"
         << "Giovana Mendonça Zambanini                      20728\n"
         << "Isabela Clementino Ponciano Ferreira            20138\n"
@@ -173,7 +49,7 @@ int main()
             << "[D] Descompactar\n"
             << "[F] Fim\n"
             << "Digite aqui sua resposta: ";
-        std::cin >> &opcao;
+        std::cin >> opcao;
         opcao = toupper(opcao);
         
         switch (opcao)
@@ -214,7 +90,7 @@ int main()
                 }
 
                 //Criacao da Fila de prioridades
-                ListaLigada lista;
+                ListaLigada* lista = new ListaLigada;
 
                 for (int i = 0; i < 256; i++) {
 
@@ -225,49 +101,40 @@ int main()
                     if (tbFreq[i] != 0) { // insere os bytes com freq > 0 na lista de prioridade
                         NoArvore* noArvore = new NoArvore(i, tbFreq[i], NULL, NULL);
                         NodoDeListaLigada* noLista = new NodoDeListaLigada(noArvore, NULL);
-                        lista.Insira(noLista, lista.getPrimeiro());
-                        //delete noArvore;
-                        //delete noLista;
+                        lista->Insira(noLista, lista->getPrimeiro());
                     }
                 }
 
                 NodoDeListaLigada* no = new NodoDeListaLigada;
-                /*while (no != NULL) { //contrutor de copia?
-                    no = no->prox;
-                }*/
 
                 //Construcao da arvore a partir da fila de prioridades
-                while (lista.getPrimeiro()->getProx() != NULL) // enquanto tiver dois ou mais nodos
+                while (lista->getPrimeiro()->getProx() != NULL) // enquanto tiver dois ou mais nodos
                 {
                     NoArvore* noArvore = new NoArvore(257, NULL, NULL, NULL);
                     no = new NodoDeListaLigada(noArvore, NULL);
 
-                    no->getInfo()->setEsq(lista.getPrimeiro()->getInfo()); // esquerda
-                    lista.Remova(lista.getPrimeiro(), lista.getPrimeiro());////////////////////
+                    no->getInfo()->setEsq(lista->getPrimeiro()->getInfo()); // esquerda
+                    lista->Remova(lista->getPrimeiro(), lista->getPrimeiro());
 
-                    no->getInfo()->setDir(lista.getPrimeiro()->getInfo()); // direita
-                    lista.Remova(lista.getPrimeiro(), lista.getPrimeiro()); //VERIFICAR O REMOVA
+                    no->getInfo()->setDir(lista->getPrimeiro()->getInfo()); // direita
+                    lista->Remova(lista->getPrimeiro(), lista->getPrimeiro()); //VERIFICA O REMOVA
 
                     no->getInfo()->setFreq(no->getInfo()->getEsq()->getFreq() + no->getInfo()->getDir()->getFreq());
-                    lista.Insira(no, lista.getPrimeiro());  // frequencia
+                    lista->Insira(no, lista->getPrimeiro());  // frequencia
                 }
 
 
                 // tirando a árvore da lista
-                NoArvore raiz = NoArvore(no->getInfo()->getByte(), no->getInfo()->getFreq(), no->getInfo()->getEsq(), no->getInfo()->getDir());
-                lista.Remova(lista.getPrimeiro(), lista.getPrimeiro());
+                NoArvore* raiz = new NoArvore(no->getInfo()->getByte(), no->getInfo()->getFreq(), no->getInfo()->getEsq(), no->getInfo()->getDir());
+                lista->Remova(lista->getPrimeiro(), lista->getPrimeiro());
 
                 // compactando a o arquivo...
                 fseek(arqLer, 0, SEEK_SET);     // volta no começo do arq de leitura
                 unsigned char aux = NULL;
-                int tamanhoArvore = raiz.Altura(&raiz);
+                int tamanhoArvore = raiz->Altura(raiz);
                 int tamanhoCodigo = (tamanhoArvore * sizeof(char)) + 1;
                 char* codigoHuffman = (char*)malloc(tamanhoCodigo); //Criado a partir do tamanho da árvore, para não ocupar memória desnecessária
 
-                std::cout << "\nstd::cout <<  bytes--\n\n"
-                    << tamanhoArvore << " -- ALTURA, "
-                    << sizeof(char) << " -- TAMANHO CHAR, "
-                    << sizeof(codigoHuffman) << " -- TAMANHO CODIGO\n";
                 int tamanhoByte = 0;
                 unsigned char auxiliar = 0;
 
@@ -277,7 +144,7 @@ int main()
                     strcpy_s(codigoHuffman, sizeof(codigoHuffman), "");
                     int posCaminho = 0;
                     if (tbFreq[aux] != 0) {
-                        raiz.percorrerArvore(&raiz, aux, codigoHuffman, posCaminho); // guarda o caminho da raiz até a folha no codigoHuffman
+                        raiz->percorrerArvore(raiz, aux, codigoHuffman, posCaminho); // guarda o caminho da raiz até a folha no codigoHuffman
 
                         //alteracao
                         for (int pos = 0; pos < strlen(codigoHuffman); pos++) // percorre o codigoHuffman
@@ -297,16 +164,15 @@ int main()
                         }
                     }
                 }
-                printBits(auxiliar);
-                std::cout << "---- numero com desprezados";
                 qtdBitsDesprez = tamanhoByte % 8;
                 fwrite(&auxiliar, 1, 1, arqCompactar); // ESCREVE O ULTIMO 
                 fseek(arqCompactar, 0, SEEK_SET);      // volta pro começo do arquivo
                 fwrite(&qtdBitsDesprez, sizeof(unsigned char), 1, arqCompactar); // reescreve o qtdBitsDesprez
 
                 std::cout << "\n. . .SUCESSO!!!\n";
-                //delete lista;
-                //delete codigoHuffman;
+                delete lista;
+                delete no;
+                delete raiz;
                 fclose(arqCompactar);
                 fclose(arqLer);
                 break;
@@ -318,7 +184,6 @@ int main()
                 std::cin >> nomeArqCompac;
                 char* nomeArqDescompac;
                 fopen_s(&arqCompactar, nomeArqCompac, "rb");
-                std::cout << nomeArqCompac;
 
                 //Remove o _.huff 
                 char* next_token1 = NULL;
@@ -337,7 +202,7 @@ int main()
                 sizeArq = ftell(arqCompactar);
                 fseek(arqCompactar, 0, SEEK_SET);
 
-                ListaLigada lis;
+                ListaLigada* lis = new ListaLigada;
 
                 //Lê o número que indica a qtdd de bits desprezados, que estão no ínicio do arquivo
                 unsigned char desprezado;
@@ -345,66 +210,60 @@ int main()
 
                 unsigned int ch = NULL;
                 unsigned int f = 0;
-                for (int i = 0; i < 256; i++) // cria a tabela freq 
+                for (int i = 0; i < 256; i++) 
                 {
                     fread(&ch, sizeof(unsigned int), 1, arqCompactar); // byte
                     fread(&f, sizeof(unsigned int), 1, arqCompactar); //freq
                     if (f != 0) { // os bytes q tem freq > 0 são inseridos na arvore
                         NoArvore* noArvore = new NoArvore(ch, f, NULL, NULL);
                         NodoDeListaLigada* noLista = new NodoDeListaLigada(noArvore, NULL);
-                        lis.Insira(noLista, lis.getPrimeiro());
+                        lis->Insira(noLista, lis->getPrimeiro());
                     }
                 }
 
                 //Print da lista ligada
                 NodoDeListaLigada* n = new NodoDeListaLigada;
-                //while (n != NULL) {
-                   // n = n->prox;
-                //}
 
                 //Construção da arvore a partir da fila de prioridades
-                while (lis.getPrimeiro()->getProx() != NULL) // enquanto tiver dois ou mais nodos
+                while (lis->getPrimeiro()->getProx() != NULL) // enquanto tiver dois ou mais nodos
                 {
                     NoArvore* noArvore = new NoArvore(257, NULL, NULL, NULL);
                     n = new NodoDeListaLigada(noArvore, NULL);
 
-                    n->getInfo()->setEsq(lis.getPrimeiro()->getInfo()); // esquerda
-                    lis.Remova(lis.getPrimeiro(), lis.getPrimeiro());////////////////////
+                    n->getInfo()->setEsq(lis->getPrimeiro()->getInfo()); // esquerda
+                    lis->Remova(lis->getPrimeiro(), lis->getPrimeiro());
 
-                    n->getInfo()->setDir(lis.getPrimeiro()->getInfo()); // direita
-                    lis.Remova(lis.getPrimeiro(), lis.getPrimeiro()); //VERIFICAR O REMOVA
+                    n->getInfo()->setDir(lis->getPrimeiro()->getInfo()); // direita
+                    lis->Remova(lis->getPrimeiro(), lis->getPrimeiro()); //VERIFICAR O REMOVA
 
                     n->getInfo()->setFreq(n->getInfo()->getEsq()->getFreq() + n->getInfo()->getDir()->getFreq());
-                    lis.Insira(n, lis.getPrimeiro());  // frequencia
+                    lis->Insira(n, lis->getPrimeiro());  // frequencia
                 }
 
                 // tirando a árvore da lista
                 NoArvore* r = new NoArvore(n->getInfo()->getByte(), n->getInfo()->getFreq(), n->getInfo()->getEsq(), n->getInfo()->getDir());
 
                 unsigned char bit = 0;
-                int aux = 0;
+                unsigned char aux = 0;
                 int posContraria = 1;
                 int posAtual = ftell(arqCompactar); //Pega a posição atual do cursor
-
+                
                 //Leitura de todo o arquivo, menos o ultimo byte, devido aos bits desprezados
                 while (fread(&bit, sizeof(unsigned char), 1, arqCompactar) && posAtual < (sizeArq - 1))
                 {
-                    //printBits(bit);
-                    //posContraria = 0;
                     for (int pos = 7, posContraria = 0; pos >= 0; pos--, posContraria++)
                     {
                         aux = (bit << posContraria); // bit vai para a primeira pos do byte (apaga os bits anteriores ao bit atual)
-                        //printBits(aux);
                         aux = (aux >> 7); // bit vai para a ultima posição do byte (apaga os bits depois do byte)
-                        //printBits(aux);
+                        
                         if (aux == 0)
                             r = r->getEsq();
                         else if (aux == 1)
-                            r = r->getEsq();
+                            r = r->getDir();
                         if (r->getEsq() == NULL && r->getDir() == NULL) {
                             int b = r->getByte();
                             fwrite(&b, sizeof(unsigned char), 1, arqDescompactar); //achou folha
-                            r = lis.getPrimeiro()->getInfo();
+                            r = lis->getPrimeiro()->getInfo();
                         }
                     }
                     posAtual = ftell(arqCompactar); //Atualiza posAtual com o valor do cursor, para fazer a comparação no while
@@ -415,27 +274,27 @@ int main()
                 for (int pos = 7, posContraria = 0; pos >= 0 && posContraria < desprezado; pos--, posContraria++)
                 {
                     aux = (bit << posContraria); // bit vai para a primeira pos do byte (apaga os bits anteriores ao bit atual)
-                    //printBits(aux);
                     aux = (aux >> 7); // bit vai para a ultima posição do byte (apaga os bits depois do byte)
-                    //printBits(aux);
+                    
                     if (aux == 0)
                         r = r->getEsq();
                     else if (aux == 1)
-                        r = r->getEsq();
+                        r = r->getDir();
                     if (r->getEsq() == NULL && r->getDir() == NULL) {
                         int b = r->getByte();
                         fwrite(&b, sizeof(unsigned char), 1, arqDescompactar); //achou folha
-                        r = lis.getPrimeiro()->getInfo();
+                        r = lis->getPrimeiro()->getInfo();
                     }
                 }
                 std::cout << "\n. . .SUCESSO!!!\n";
-                //free(lis);
+                delete lis;
+                delete n;
+                delete r;
                 fclose(arqDescompactar);
                 fclose(arqCompactar);
                 break;
 
             }
-            
             case 'F':
             {
                 std::cout << "\n. . .Obrigado por utilizar esse programa!!!\n";

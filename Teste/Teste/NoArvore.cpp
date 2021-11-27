@@ -10,9 +10,7 @@ NoArvore::NoArvore(int byte, int freq, NoArvore* Esq, NoArvore* Dir)
     this->Dir = Dir;
 }
 
-NoArvore::NoArvore() 
-{
-}
+NoArvore::NoArvore() {} // construtor padrao
 
 int NoArvore::percorrerArvore(NoArvore* raiz, int byteProc, char* caminho, int posCaminho)
 {
@@ -97,8 +95,3 @@ void NoArvore::setDir(NoArvore* dir)
     this->Dir = dir;
 }
 
-/*
-Fazer operators
-Construtor de copia
-Destrutor
-*/

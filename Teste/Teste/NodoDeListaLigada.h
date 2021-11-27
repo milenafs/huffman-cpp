@@ -4,16 +4,16 @@
 
 class NodoDeListaLigada
 {
-private:
+	private:
 
-	NodoDeListaLigada* prox;
-	NoArvore* info; // ponteiro de nodo de arvore
-public:	
-	 NodoDeListaLigada(NoArvore* noArvore, NodoDeListaLigada* prox);
-	 NodoDeListaLigada();
-	 NodoDeListaLigada* getProx();
-	 NoArvore* getInfo();
-	 void setProx(NodoDeListaLigada* prox);
-	 void setInfo(NoArvore* info);
+		NodoDeListaLigada* prox;
+		NoArvore* info; // ponteiro de nodo de arvore
+	public:	
+		 NodoDeListaLigada(NoArvore* noArvore, NodoDeListaLigada* prox);
+		 NodoDeListaLigada();
+		 NodoDeListaLigada* getProx();
+		 NoArvore* getInfo();
+		 void setProx(NodoDeListaLigada* prox);
+		 void setInfo(NoArvore* info);
 };
 #endif

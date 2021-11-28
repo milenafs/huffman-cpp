@@ -10,7 +10,7 @@ NodoDeListaLigada::NodoDeListaLigada(NoArvore* no, NodoDeListaLigada* prox)
 }
 
 NodoDeListaLigada::NodoDeListaLigada(){}// construtor padrao
-	
+
 NodoDeListaLigada* NodoDeListaLigada::getProx() {return this->prox;}
 
 NoArvore* NodoDeListaLigada::getInfo(){return this->info;}

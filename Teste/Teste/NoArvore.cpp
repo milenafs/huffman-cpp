@@ -12,6 +12,19 @@ NoArvore::NoArvore(int byte, int freq, NoArvore* Esq, NoArvore* Dir)
 
 NoArvore::NoArvore() {} // construtor padrao
 
+NoArvore::~NoArvore()
+{
+   Descarte(this);
+}
+
+void NoArvore::Descarte(NoArvore* noAtual) {
+    if (noAtual)
+    {
+        delete noAtual->Esq;
+        delete noAtual->Dir;
+    }
+}
+
 int NoArvore::percorrerArvore(NoArvore* raiz, int byteProc, char* caminho, int posCaminho)
 {
     if (raiz->byte == byteProc)  // chegou na folha

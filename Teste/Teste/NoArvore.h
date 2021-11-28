@@ -11,6 +11,8 @@ class NoArvore
     public:
         NoArvore(int byte, int freq, NoArvore* Esq,  NoArvore* Dir);
         NoArvore();
+        ~NoArvore();
+        void Descarte(NoArvore* noAtual);
         int percorrerArvore(NoArvore* raiz, int byteProc, char* caminho, int posCaminho);
         int Altura(NoArvore* noAtual) const;
         int getByte();

@@ -11,6 +11,18 @@ ListaLigada::ListaLigada(NodoDeListaLigada* inicio, NodoDeListaLigada* fim)
 
 ListaLigada::ListaLigada(){} // construtor padrao
 
+ListaLigada::~ListaLigada()
+{
+    Descarte(this);
+} 
+
+void ListaLigada::Descarte(ListaLigada* lista)
+{
+    if (lista->primeiro->getProx()) {
+        delete lista->primeiro->getProx();
+    }
+}
+
 /*Caso der erro, voltar a lista como parametro*/
 NodoDeListaLigada* ListaLigada::Insira(NodoDeListaLigada* NodoLista, NodoDeListaLigada* Inicio)
 {

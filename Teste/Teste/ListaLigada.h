@@ -7,6 +7,8 @@ class ListaLigada
 		 NodoDeListaLigada* primeiro, * ultimo;
 	public:
 		ListaLigada();
+		~ListaLigada();
+		void Descarte(ListaLigada* lista);
 		ListaLigada(NodoDeListaLigada* primeiro, NodoDeListaLigada* ultimo);
 		NodoDeListaLigada* getPrimeiro();
 		NodoDeListaLigada* getUltimo();

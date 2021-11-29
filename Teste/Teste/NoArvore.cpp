@@ -1,4 +1,6 @@
+#include <string.h>
 #include <stdlib.h>
+#include <iostream>
 #include "NoArvore.h"
 
 NoArvore::NoArvore() {} // construtor padrao
@@ -6,69 +8,22 @@ NoArvore::NoArvore() {} // construtor padrao
 NoArvore::NoArvore(int byte, int freq, NoArvore* esq, NoArvore* dir):
     byte(byte),freq(freq),Esq(esq),Dir(dir){}
 
-NoArvore::~NoArvore(){ this->Descarte(this);}
 
-void NoArvore::Descarte(NoArvore* noAtual) {
-    if (noAtual)
-    {
-        delete noAtual->Esq;
-        delete noAtual->Dir;
-    }
+int NoArvore::operator==(const NoArvore& n) 
+{
+    if (this->byte != n.byte) return 0;
+    if (this->freq != n.freq) return 0;
+    if (this->Esq != n.Esq) return 0;
+    if (this->Dir != n.Dir) return 0;
+    return 1;
 }
 
-int NoArvore::operator== (const NoArvore& n)
+int NoArvore::operator!= (const NoArvore& n) 
 {
-    
-}
-
-int NoArvore::operator!= (const NoArvore& n)
-{
-    
-}
-
-int NoArvore::percorrerArvore(NoArvore* raiz, int byteProc, char* caminho, int posCaminho)
-{
-    if (raiz->byte == byteProc)  // chegou na folha
-    {
-        caminho[posCaminho] = '\0';  // termina o vetor caminho
-        return 1; // achou
-    }
-    else
-    {
-        int encontrado = 0; // não achou
-
-
-        if (raiz->Esq != NULL) // se tiver filho esquerdo
-        {
-            caminho[posCaminho] = '0';
-            encontrado = percorrerArvore(raiz->Esq, byteProc, caminho, posCaminho + 1); // recursão com o filho nodo esquerdo
-        }
-
-        if (encontrado != 1 && raiz->Dir != NULL) // se tiver direita e n tiver encontrado na esquerda
-        {
-            caminho[posCaminho] = '1';
-            encontrado = percorrerArvore(raiz->Dir, byteProc, caminho, posCaminho + 1); // se tive
-        }
-        if (encontrado != 1) // se for uma folha mas n for a folha procurada
-        {
-            caminho[posCaminho] = '\0'; // finaliza
-        }
-        return encontrado;
-    }
-}
-int NoArvore::Altura(NoArvore* noAtual) const
-{
-    int alturaEsquerda,
-        alturaDireita;
-    if (noAtual == NULL)
+    if (*this == n)
         return 0;
-    alturaEsquerda = Altura(noAtual->Esq);  //Recursão para contar o lado esquerdo desse nó
-    alturaDireita = Altura(noAtual->Dir);   //Recursão para contar o lado direito desse nó
-    if (alturaEsquerda >= alturaDireita)
-        return 1 + alturaEsquerda;          //Se a árvore for 'desbalanceada', retorna o maior valor (vale pra essa linha e pra debaixo)
-    return 1 + alturaDireita;
+    return 1;
 }
-
 
 int NoArvore::getByte()
 {

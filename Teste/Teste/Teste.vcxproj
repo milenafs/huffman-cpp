@@ -139,12 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arvore.cpp" />
     <ClCompile Include="ListaLigada.cpp" />
     <ClCompile Include="NoArvore.cpp" />
     <ClCompile Include="NodoDeListaLigada.cpp" />
     <ClCompile Include="Origem.cpp" />
+    <ClCompile Include="Teste.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arvore.h" />
     <ClInclude Include="ListaLigada.h" />
     <ClInclude Include="NoArvore.h" />
     <ClInclude Include="NodoDeListaLigada.h" />

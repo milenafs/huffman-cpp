@@ -10,7 +10,7 @@ class ListaLigada
 		~ListaLigada();
 		int operator== (const ListaLigada&);
 		int operator!= (const ListaLigada&);
-		void Descarte(ListaLigada* );
+		void Descarte();
 		ListaLigada(NodoDeListaLigada* , NodoDeListaLigada* );
 		NodoDeListaLigada* getPrimeiro();
 		NodoDeListaLigada* getUltimo();

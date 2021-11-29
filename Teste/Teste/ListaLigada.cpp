@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <iostream>
 #include "ListaLigada.h"
 #include "NodoDeListaLigada.h"
 
@@ -8,42 +9,17 @@ ListaLigada::ListaLigada() {} // construtor padrao
 ListaLigada::ListaLigada(NodoDeListaLigada* inicio, NodoDeListaLigada* fim):
     primeiro(inicio),ultimo(fim){}
 
-ListaLigada::~ListaLigada(){this->Descarte(this);} 
-/*
-void ListaLigada::Descarte(ListaLigada* lista)
+ListaLigada::~ListaLigada(){this->Descarte();} 
+
+void ListaLigada::Descarte()
 {
-    if (lista->primeiro->getProx()) {
-        delete lista->primeiro->getProx();
+    for (NodoDeListaLigada* n = this->primeiro; this->primeiro != NULL;n = this->primeiro)
+    {
+        this->primeiro = this->primeiro->getProx();
+        delete n;
     }
 }
-*/
 
-
-/*ListaLigada& ListaLigada::operator= (const ListaLigada& l)
-{
-    this->Descarte(this);
-    NodoDeListaLigada pt, pl;
-    for(pl = l.primeiro;pl != NULL; pl = pl.getProx())
-    {
-        if(this->primeiro == NULL)
-        {
-            if ((this->primeiro = new NodoDeListaLigada) == NULL)
-                break;
-            this->primeiro->setInfo(pl.getInfo());
-            this->primeiro->setProx(NULL);
-            pt = this->getPrimeiro();
-        }
-        else
-        {
-            if (pt.setProx(new NodoDeListaLigada) == NULL)
-                break;
-            pt = pt.getProx();
-            pt.setInfo(pl.getInfo());
-            pt.setProx(NULL);
-        }
-    }
-    return *this;
-}*/
 
 int ListaLigada::operator== (const ListaLigada& l)
 {
@@ -56,14 +32,14 @@ int ListaLigada::operator== (const ListaLigada& l)
         aux.setPrimeiro(aux.primeiro->getProx());
         
     }
+    return 1;
 }
 
 int ListaLigada::operator!= (const ListaLigada& l)
 {
     if(!(*this == l))
         return 1;
-    else
-        return 0;
+    return 0;
 }
 
 /*Caso der erro, voltar a lista como parametro*/

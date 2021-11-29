@@ -11,10 +11,10 @@ class NodoDeListaLigada
 	public:	
 		 NodoDeListaLigada(NoArvore* , NodoDeListaLigada* );
 		 NodoDeListaLigada();
-		 ~NodoDeListaLigada();
+		
 		 int operator== (const NodoDeListaLigada&);
 		 int operator!= (const NodoDeListaLigada&);
-		 void Descarte(NodoDeListaLigada* );
+		 
 		 NodoDeListaLigada* getProx();
 		 NoArvore* getInfo();
 		 void setProx(NodoDeListaLigada* );

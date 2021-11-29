@@ -11,13 +11,9 @@ class NoArvore
     public:
         NoArvore(int , int , NoArvore* ,  NoArvore* );
         NoArvore();
-        ~NoArvore();
+
         int operator== (const NoArvore&);
         int operator!= (const NoArvore&);
-
-        void Descarte(NoArvore* );
-        int percorrerArvore(NoArvore* , int , char* , int );
-        int Altura(NoArvore* ) const;
         int getByte();
         int getFreq();
         NoArvore* getEsq();

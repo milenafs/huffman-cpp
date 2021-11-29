@@ -12,8 +12,8 @@ class NoArvore
         NoArvore(int , int , NoArvore* ,  NoArvore* );
         NoArvore();
 
-        int operator== (const NoArvore&);
-        int operator!= (const NoArvore&);
+        int operator== (const NoArvore &n);
+        int operator!= (const NoArvore &n);
         int getByte();
         int getFreq();
         NoArvore* getEsq();

@@ -9,7 +9,7 @@ NoArvore::NoArvore(int byte, int freq, NoArvore* esq, NoArvore* dir):
     byte(byte),freq(freq),Esq(esq),Dir(dir){}
 
 
-int NoArvore::operator==(const NoArvore& n) 
+int NoArvore::operator==(const NoArvore &n) 
 {
     if (this->byte != n.byte) return 0;
     if (this->freq != n.freq) return 0;
@@ -18,7 +18,7 @@ int NoArvore::operator==(const NoArvore& n)
     return 1;
 }
 
-int NoArvore::operator!= (const NoArvore& n) 
+int NoArvore::operator!= (const NoArvore &n) 
 {
     if (*this == n)
         return 0;

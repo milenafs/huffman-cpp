@@ -9,20 +9,23 @@ class NoArvore
         NoArvore* Esq;
         NoArvore* Dir;
     public:
-        NoArvore(int byte, int freq, NoArvore* Esq,  NoArvore* Dir);
+        NoArvore(int , int , NoArvore* ,  NoArvore* );
         NoArvore();
         ~NoArvore();
-        void Descarte(NoArvore* noAtual);
-        int percorrerArvore(NoArvore* raiz, int byteProc, char* caminho, int posCaminho);
-        int Altura(NoArvore* noAtual) const;
+        int operator== (const NoArvore&);
+        int operator!= (const NoArvore&);
+
+        void Descarte(NoArvore* );
+        int percorrerArvore(NoArvore* , int , char* , int );
+        int Altura(NoArvore* ) const;
         int getByte();
         int getFreq();
         NoArvore* getEsq();
         NoArvore* getDir();
-        void setByte(int byte);
-        void setFreq(int freq);
-        void setEsq(NoArvore* esq);
-        void setDir(NoArvore* dir);
+        void setByte(int );
+        void setFreq(int );
+        void setEsq(NoArvore* );
+        void setDir(NoArvore* );
        
 };
 #endif

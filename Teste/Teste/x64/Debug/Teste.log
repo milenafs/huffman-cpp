@@ -1,5 +1,8 @@
 ﻿  ListaLigada.cpp
+  NoArvore.cpp
   NodoDeListaLigada.cpp
   Origem.cpp
   Gerando Código...
-  Teste.vcxproj -> C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\huffman_c++\Teste\x64\Debug\Teste.exe
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\huffman_c++\Teste\Teste\NoArvore.cpp(22): error C4716: 'NoArvore::operator==': deve retornar um valor
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\huffman_c++\Teste\Teste\NoArvore.cpp(27): error C4716: 'NoArvore::operator!=': deve retornar um valor
+C:\COTUCA\Conteúdo do Técnico\4_semestre\Tópicos em sistemas orientados a objetos\Projetos\huffman_c++\Teste\Teste\ListaLigada.cpp(59): warning C4715: 'ListaLigada::operator==': nem todos os caminhos de controle retornam um valor

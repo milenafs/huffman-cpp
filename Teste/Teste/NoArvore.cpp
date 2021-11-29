@@ -1,21 +1,12 @@
-#include <string.h>
 #include <stdlib.h>
 #include "NoArvore.h"
 
-NoArvore::NoArvore(int byte, int freq, NoArvore* Esq, NoArvore* Dir) 
-{
-    this->byte = byte;
-    this->freq = freq;
-    this->Esq = Esq;
-    this->Dir = Dir;
-}
-
 NoArvore::NoArvore() {} // construtor padrao
 
-NoArvore::~NoArvore()
-{
-   Descarte(this);
-}
+NoArvore::NoArvore(int byte, int freq, NoArvore* esq, NoArvore* dir):
+    byte(byte),freq(freq),Esq(esq),Dir(dir){}
+
+NoArvore::~NoArvore(){ this->Descarte(this);}
 
 void NoArvore::Descarte(NoArvore* noAtual) {
     if (noAtual)
@@ -23,6 +14,16 @@ void NoArvore::Descarte(NoArvore* noAtual) {
         delete noAtual->Esq;
         delete noAtual->Dir;
     }
+}
+
+int NoArvore::operator== (const NoArvore& n)
+{
+    
+}
+
+int NoArvore::operator!= (const NoArvore& n)
+{
+    
 }
 
 int NoArvore::percorrerArvore(NoArvore* raiz, int byteProc, char* caminho, int posCaminho)
